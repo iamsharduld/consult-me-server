@@ -8,7 +8,7 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)
 api = Api(app)
 
-data = pd.read_csv('../Code-J.csv')
+data = pd.read_csv('Code-J.csv')
 data = data.drop(data.index[[0]])
 cols = data.columns
 cols = cols[2:]
