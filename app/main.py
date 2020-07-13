@@ -8,7 +8,7 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)
 api = Api(app)
 
-data = pd.read_csv('Code-J.csv')
+data = pd.read_csv('../Code-J.csv')
 data = data.drop(data.index[[0]])
 cols = data.columns
 cols = cols[2:]
@@ -66,5 +66,5 @@ class SymptomList(Resource):
 api.add_resource(Diagnosis, '/diagnose')
 api.add_resource(SymptomList, '/symptoms')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run()
