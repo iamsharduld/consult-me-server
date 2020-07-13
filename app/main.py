@@ -8,7 +8,7 @@ from flask_restful import Resource, Api, reqparse
 app = Flask(__name__)
 api = Api(app)
 
-data = pd.read_csv('Code-J.csv')
+data = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/consult-me-1447f.appspot.com/o/Code-J.csv?alt=media&token=f237da2e-3eb2-4495-be17-e90ce382eeca')
 data = data.drop(data.index[[0]])
 cols = data.columns
 cols = cols[2:]
@@ -66,5 +66,5 @@ class SymptomList(Resource):
 api.add_resource(Diagnosis, '/diagnose')
 api.add_resource(SymptomList, '/symptoms')
 
-# if __name__ == '__main__':
-#     app.run()
+if __name__ == '__main__':
+    app.run()
