@@ -45,9 +45,12 @@ class Diagnosis(Resource):
 
     
     
-    def post(self, name):
-        filtered = data['symptoms']
-        for symptom in ip:
+    def post(self):
+        # print(request.get_json())
+        req_data = request.get_json()
+        print(req_data['symptoms'])
+        filtered = data
+        for symptom in req_data['symptoms']:
             filtered = filtered.loc[((filtered[symptom] == "1") | (filtered[symptom] == "2"))]
 
         df = filtered.drop_duplicates(subset = ["0Symptoms list"])
@@ -66,5 +69,5 @@ class SymptomList(Resource):
 api.add_resource(Diagnosis, '/diagnose')
 api.add_resource(SymptomList, '/symptoms')
 
-if __name__ == '__main__':
-    app.run()
+# if __name__ == '__main__':
+#     app.run(debug=True)
