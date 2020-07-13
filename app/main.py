@@ -4,9 +4,11 @@ import pandas as pd
 
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 api = Api(app)
+cors = CORS(app)
 
 data = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/consult-me-1447f.appspot.com/o/Code-J.csv?alt=media&token=f237da2e-3eb2-4495-be17-e90ce382eeca')
 data = data.drop(data.index[[0]])
@@ -25,7 +27,7 @@ class Diagnosis(Resource):
     #     help="This field cannot be left blank"
     # )
 
-
+    @cross_origin()
     def get(self):
         # data = Item.parser.parse_args()
         # ip = data
@@ -44,7 +46,7 @@ class Diagnosis(Resource):
         return {'possibilities': list(diag)}
 
     
-    
+    @cross_origin()
     def post(self):
         # print(request.get_json())
         req_data = request.get_json()
@@ -62,6 +64,8 @@ class Diagnosis(Resource):
 
 
 class SymptomList(Resource):
+
+    @cross_origin()
     def get(self):
         return {'items': list(cols)}
 
@@ -69,5 +73,5 @@ class SymptomList(Resource):
 api.add_resource(Diagnosis, '/diagnose')
 api.add_resource(SymptomList, '/symptoms')
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
