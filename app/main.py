@@ -1,5 +1,6 @@
 import psycopg2
 import numpy as np
+
 import pandas as pd
 
 from flask import Flask, request
@@ -10,13 +11,18 @@ app = Flask(__name__)
 api = Api(app)
 cors = CORS(app)
 
-data = pd.read_csv('https://myspa.sfo2.digitaloceanspaces.com/Code-J.csv')
-data = data.drop(data.index[[0]])
+googleSheetId = '1dPTIcVN9ux6mX5y8Xql_kvHZXm45mF9UXbdznytyoto'
+worksheetName = 'Code-J'
+URL = 'https://docs.google.com/spreadsheets/d/{0}/gviz/tq?tqx=out:csv&sheet={1}'.format(
+	googleSheetId,
+	worksheetName
+)
+
+data = pd.read_csv(URL)
 cols = data.columns
 cols = cols[2:]
 X = data[data.columns]
 y = data['0Symptoms list']
-
 
 class Diagnosis(Resource):
 
@@ -36,7 +42,7 @@ class Diagnosis(Resource):
 
         filtered = data
         for symptom in ip:
-            filtered = filtered.loc[((filtered[symptom] == "1") | (filtered[symptom] == "2") )]
+            filtered = filtered.loc[((filtered[symptom] == 1) | (filtered[symptom] == 2) )]
 
         df = filtered.drop_duplicates(subset = ["0Symptoms list"])
         diag = []
@@ -53,7 +59,7 @@ class Diagnosis(Resource):
         print(req_data['symptoms'])
         filtered = data
         for symptom in req_data['symptoms']:
-            filtered = filtered.loc[((filtered[symptom] == "1") | (filtered[symptom] == "2"))]
+            filtered = filtered.loc[((filtered[symptom] == 1) | (filtered[symptom] == 2))]
 
         df = filtered.drop_duplicates(subset = ["0Symptoms list"])
         diag = []
