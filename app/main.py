@@ -10,7 +10,7 @@ app = Flask(__name__)
 api = Api(app)
 cors = CORS(app)
 
-data = pd.read_csv('https://firebasestorage.googleapis.com/v0/b/consult-me-1447f.appspot.com/o/Code-J.csv?alt=media&token=f237da2e-3eb2-4495-be17-e90ce382eeca')
+data = pd.read_csv('https://myspa.sfo2.digitaloceanspaces.com/Code-J.csv')
 data = data.drop(data.index[[0]])
 cols = data.columns
 cols = cols[2:]
