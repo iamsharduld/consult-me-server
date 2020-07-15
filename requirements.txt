@@ -4,3 +4,4 @@ flask_restful
 gunicorn
 psycopg2
 flask_cors
+flask_jwt
