@@ -27,8 +27,8 @@ y = data['0Symptoms list']
 app = Flask(__name__)
 api = Api(app)
 cors = CORS(app)
-app.secret_key = 'jose'
-jwt = JWT(app, authenticate, identity)
+# app.secret_key = 'jose'
+# jwt = JWT(app, authenticate, identity)
 
 
 
