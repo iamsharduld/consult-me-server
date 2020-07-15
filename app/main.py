@@ -40,7 +40,6 @@ class Diagnosis(Resource):
     #     required=True,
     #     help="This field cannot be left blank"
     # )
-    @jwt_required()
     @cross_origin()
     def get(self):
         # data = Item.parser.parse_args()
@@ -59,7 +58,6 @@ class Diagnosis(Resource):
         
         return {'possibilities': list(diag)}
 
-    @jwt_required()
     @cross_origin()
     def post(self):
         # print(request.get_json())
@@ -79,7 +77,6 @@ class Diagnosis(Resource):
 
 class SymptomList(Resource):
 
-    @jwt_required()
     @cross_origin()
     def get(self):
         return {'items': list(cols)}
