@@ -42,8 +42,6 @@ class Diagnosis(Resource):
     # )
     @cross_origin()
     def get(self):
-        # data = Item.parser.parse_args()
-        # ip = data
 
         ip = ['Dining Out', 'Started with spicy meal']
 
